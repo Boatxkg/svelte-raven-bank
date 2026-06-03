@@ -73,7 +73,6 @@
         background-size: contain;
         width: inherit;
         height: calc(85 * var(--px));
-        background-color: rgba(255, 255, 255, 0.25);
         filter: drop-shadow(0 0 calc(6*var(--px)) rgba(0,0,0,0.25));
     }
 
@@ -118,7 +117,7 @@
         border-radius: 1.2vh;
         transition: background-color 200ms ease;
     }
-    
+
     .lightStatus.deposit{
         background-color: #3AE998;
     }

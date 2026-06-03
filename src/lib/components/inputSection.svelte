@@ -1,10 +1,20 @@
 <script lang="ts">
     import { isBankState } from "../../stores/stores";
     import { fade,fly } from "svelte/transition";
+
     let counter  = $state(0)
     let uid = $state(0)
     let amountTemplate = [100,500,1000,5000,10000]
+    let constrainedQuantity = $derived(
+         Math.max(1, Math.min(counter, Infinity))
+    );
 
+    $effect(()=>{
+        if(counter !== constrainedQuantity){
+            counter = constrainedQuantity;
+        }
+    })
+    
 </script>
 
 <div class="inputSection">
@@ -14,11 +24,15 @@
             class:spanDeposit={$isBankState.CurrentPage == 'deposit'}
             class:spanWithdraw={$isBankState.CurrentPage == 'withdraw'}
             class:spanTransfer={$isBankState.CurrentPage == 'transfer'}>{$isBankState.CurrentPage}</span> : ENTER AMOUNT</p>
-        <input type="number" class="TextInput"
-        class:deposit={$isBankState.CurrentPage == 'deposit'}
-        class:withdraw={$isBankState.CurrentPage == 'withdraw'}
-        class:transfer={$isBankState.CurrentPage == 'transfer'} 
-        bind:value={counter}>
+        <div class="inputWrapper"
+            class:deposit={$isBankState.CurrentPage == 'deposit'}
+                class:withdraw={$isBankState.CurrentPage == 'withdraw'}
+                class:transfer={$isBankState.CurrentPage == 'transfer'} >
+            <span>$</span>
+            <input 
+            type="number" min="1"  class="TextInput"
+            bind:value={counter} onchange={()=>constrainedQuantity} >
+        </div>
     </div>
 
     <div class="inputBottom"
@@ -55,6 +69,7 @@
         gap: calc(2*var(--px));
         overflow: hidden;
     }
+
     .inputTop{
         display: flex;
         flex-direction: column;
@@ -66,11 +81,11 @@
         background-size: contain;
         justify-content: center;
         align-items: center;
-        background-color: rgba(255,255,255,0.2);
         box-sizing: border-box;
         padding-bottom: calc(20*var(--px));
         filter: drop-shadow(0 0 calc(6*var(--px)) rgba(0,0,0,0.25));
     }
+
 
     .labelInput{
         text-transform: uppercase;
@@ -102,6 +117,43 @@
     }
 
     .TextInput{
+        /* border: calc(3*var(--px)) solid transparent;
+        outline: unset;
+        border-radius: 2vh;
+        width: calc(500*var(--px));
+        height: calc(40*var(--px));
+        background: transparent;
+        box-sizing: border-box;
+        padding: 0vh 2vh;
+        text-align: center;
+        transition: background 235ms ease , border 235ms ease; */
+        color: aliceblue;
+        width: inherit;
+        padding: 0vh 0.3vh;
+        font-size: calc(21*var(--px));
+        font-weight: 500;
+        font-family: 'Kanit';
+        background: unset;
+        outline: unset; 
+        border: unset;
+        
+    }
+    .inputWrapper.deposit{
+        border-color: #2F6F52;
+        background: linear-gradient(to top,rgba(71,148,117,0.8), rgba(18,50,42,1));
+    }
+    .inputWrapper.withdraw{
+        border-color: #C32A3A;
+        background: linear-gradient(to top , rgba(148,52,56,0.8) , rgba(61,24,22,1));
+    }
+         
+    .inputWrapper.transfer{
+        border-color: #FF8E31;
+        background: linear-gradient(to top, rgba(255,153,89,0.8) , rgba(65,41,28,1));
+    }
+
+
+    .inputWrapper{
         border: calc(3*var(--px)) solid transparent;
         outline: unset;
         border-radius: 2vh;
@@ -116,19 +168,9 @@
         font-size: calc(21*var(--px));
         font-weight: 500;
         font-family: 'Kanit';
-    }
-    .TextInput.deposit{
-        border-color: #2F6F52;
-        background: linear-gradient(to top,rgba(71,148,117,0.8), rgba(18,50,42,1));
-    }
-    .TextInput.withdraw{
-        border-color: #C32A3A;
-        background: linear-gradient(to top , rgba(148,52,56,0.8) , rgba(61,24,22,1));
-    }
-
-    .TextInput.transfer{
-        border-color: #FF8E31;
-        background: linear-gradient(to top, rgba(255,153,89,0.8) , rgba(65,41,28,1));
+        display: flex;
+        justify-content: center !important; 
+        align-items: center;
     }
 
     button{

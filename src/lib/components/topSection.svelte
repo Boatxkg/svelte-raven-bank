@@ -14,7 +14,6 @@
         background: url(../../assets/topSection.png);
         background-repeat: no-repeat;
         background-size: contain;
-        background-color: rgba(255,255,255,0.2);
         display: flex;
         flex-direction: column;
         justify-content: center;

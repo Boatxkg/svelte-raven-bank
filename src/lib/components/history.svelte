@@ -13,6 +13,5 @@
         background: url(../../assets/footerBase.png);
         background-size: contain;
         background-repeat: no-repeat;
-        background-color: rgba(0,0,0,0.2);
     }
 </style>

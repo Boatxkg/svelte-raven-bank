@@ -1,5 +1,5 @@
 <script lang="ts">
-    let playerName = "ROSE VAYNEYAHOOOOOOOO";
+    let playerName = "michael jordan";
     import Transection from './components/transection.svelte';
     import InputSection from './components/inputSection.svelte';
     import Logo from '../assets/logo.png'
@@ -11,7 +11,9 @@
 
 <main class="container">
     <section class="mainItem" >
-        <div class="LeftSection" in:fly={{duration:200 , y:5}} out:fly={{duration:200, y:5 ,delay:100}}>
+        <div class="LeftSection" 
+            in:fly={{duration:200 , y:5}} 
+            out:fly={{duration:200, y:5 ,delay:100}}>
             <div class="textTop">
                 <p class="HeaderText">BANK</p>
                 <p class="HeaderText info">RAVEN COMUNITY</p>
@@ -24,7 +26,9 @@
                 <p class="footerLeftSectionText playername">{playerName}</p>
             </div>
         </div>
-        <div class="rightSection" in:fly={{ duration:200 , y:5 , delay:100 }} out:fly={{duration:200, y:5}}>
+        <div class="rightSection" 
+            in:fly={{ duration:200 , y:5 , delay:100 }} 
+            out:fly={{duration:200, y:5}}>
             <TopSection/>
             <Transection/>
             <InputSection/>
@@ -66,12 +70,16 @@
         padding-bottom: calc(103 *var(--px));
         filter: drop-shadow(0 0 calc(6*var(--px)) rgba(0,0,0,0.25));
         box-sizing: border-box;
-        background-color: rgba(0, 0, 0, 0.25);
     }
 
     .HeaderText {
         font-family: "Conthrax";
         font-size: calc(52 * var(--px));
+        background: linear-gradient(to top, rgba(203,204,205,1) , rgba(152,155,157,1) , rgb(228, 228, 228));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text; 
+        filter: drop-shadow(0 0 0.3vh rgba(0,0,0,0.25));
     }
 
     .HeaderText.info {
@@ -111,11 +119,12 @@
 
     .footerLeftSectionText.playername {
         color: aliceblue;
-        font-size: calc(32 * var(--px));
-        width: calc(300 * var(--px));
-        background-color: rgba(0, 0, 0, 0.25);
+        font-size: calc(24 * var(--px));
+        width: calc(275 * var(--px));
         text-wrap: nowrap;
         text-overflow: ellipsis;
+        text-transform: uppercase;
+        text-align: center;
         overflow: hidden;
     }
 
@@ -125,6 +134,5 @@
         gap: calc(5*var(--px));
         width: calc(1020*var(--px));
         max-width: calc(1020*var(--px));
-        background-color: rgba(0, 0, 0, 0.25);
     }
 </style>
